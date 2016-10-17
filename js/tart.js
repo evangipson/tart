@@ -28,13 +28,21 @@ var TART = (function() {
     var boxHeightLimit = 32;
     var boxWidth, boxHeight = 0;
     // Returns a number, defaults 0-100.
-    function randomNum(highNum = 100) {
+    function randomNum(highNum) {
+        // Set the default value for highNum
+        if(highNum === undefined) {
+            highNum = 100;
+        }
         return Math.floor(Math.random() * parseInt(highNum));
     }
     // Returns a random element from an array
     // that will be passed in, defaults to returning
     // 1, 2, or 3.
-    function getRandomElement(sourceArray = [1,2,3]) {
+    function getRandomElement(sourceArray) {
+        // Set the default value for sourceArray
+        if(sourceArray === undefined) {
+            sourceArray = [1,2,3];
+        }
         return sourceArray[randomNum(sourceArray.length)];
     }
     // Will return an up to 5 character long string
@@ -55,32 +63,33 @@ var TART = (function() {
         boxHeight = randomNum(boxHeightLimit);
     }
     function draw() {
-    for(var i = 0; i < boxAmount; i++) {
-        // Create a new span element
-        var boxElement = document.createElement("span");
-        // Reset the height and width
-        createBox();
-        // Now apply them to the boxElement.
-        boxElement.style.width = boxWidth + "px";
-        boxElement.style.height = boxHeight + "px";
-        // Fill in the box's value with some weird value.
-        boxElement.innerText = generateString();
-        // Add a random class
-        boxElement.classList.add(getRandomElement(randomCSSClasses));
-        // Append the new element to the body
-        document.body.appendChild(boxElement);
+        for(var i = 0; i < boxAmount; i++) {
+            // Create a new span element
+            var boxElement = document.createElement("span");
+            // Reset the height and width
+            createBox();
+            // Now apply them to the boxElement.
+            boxElement.style.width = boxWidth + "px";
+            boxElement.style.height = boxHeight + "px";
+            // Fill in the box's value with some weird value.
+            boxElement.innerText = generateString();
+            // Add a random class
+            boxElement.classList.add(getRandomElement(randomCSSClasses));
+            // Append the new element to the body
+            document.body.appendChild(boxElement);
+        }
     }
+    function addHoverClass(element) {
+        if(!element.classList.contains("touched")) {
+            element.classList.add("touched");
+        }
     }
     function createEventListeners() {
         var spans = document.getElementsByTagName("SPAN");
         for(var span in spans) {
             // Make sure we aren't acting on prototype properties
             if(spans.hasOwnProperty(span)) {
-                spans[span].addEventListener("hover", function() {
-                if(!spans[span].classList.contains("touched")) {
-                    spans[span].classList.add("touched");
-                }
-            });
+                spans[span].addEventListener("hover", addHoverClass(spans[span]));
             }
         }
     }
