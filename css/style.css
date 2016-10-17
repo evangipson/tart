@@ -1,0 +1,248 @@
+/* Animations */
+@keyframes onHover {
+    0%   {
+        background-color: red;
+        left:0px;
+        top:0px;
+    }
+    25%  {
+        background-color: yellow;
+        left:200px; 
+        top:0px;
+    }
+    50%  {
+        background-color: blue;
+        left:200px;
+        top:200px;
+    }
+    75%  {
+        background-color: green;
+        left:0px;
+        top:200px;
+    }
+    100% {
+        background-color: red;
+        left:0px;top:0px;
+    }
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+        left: 250px;
+        color: black;
+    }
+    50% {
+        transform: rotate(-20deg);
+        left: 10px;
+        bottom: 0;
+    }
+    75% {
+        left: -25rem;
+        color: pink;
+    }
+    90% {
+        transform: rotate(159deg);
+        left: 100px;
+    }
+    95% {
+        left: 115px;
+        color: green;
+    }
+    100% {
+        left: 110px;
+        top: 10rem;
+    }
+}
+@keyframes spinBig {
+    0% {
+        position: fixed;
+        top: 0;
+        font-size: 6rem;
+        transform: rotate(0deg);
+    }
+    10% {
+        top: 50%;
+        left: 25%;
+        font-size: 1rem;
+        transform: rotate(1080deg);
+        background: none;
+    }
+    100% {
+        top: 15%;
+        left: inherit;
+        font-size: 4rem;
+        transform: rotate(-50deg);
+        background: black;
+    }
+}
+@keyframes changeBG {
+    0% {
+        background: floralwhite;
+    }
+    50% {
+        background: ghostwhite;
+    }
+    80% {
+        background: #11ef66;
+    }
+    100% {
+        background: floralwhite;
+    }
+}
+/* HTML Resets & Default Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+}
+body {
+    background: floralwhite;
+    animation: 20s changeBG infinite;
+}
+span {
+    position: relative;
+    background: none;
+    float: left;
+    color: black;
+}
+span:hover {
+    background: black;
+    color: white;
+    position: fixed;
+    z-index: 2;
+    cursor: pointer;
+    animation: 2s onHover infinite;
+}
+/* Custom CSS Classes */
+/* (This list is maintained in the javascript) */
+.atep {
+    color: skyblue;
+    font-size: 1.1rem;
+}
+.atep:hover {
+    color: limegreen;
+    font-family: monospace;
+    background: white;
+    position: relative;
+    font-size: 6rem;
+    animation: 2s spin infinite;
+}
+.munbar {
+    background: purple;
+    color: white;
+    font-size: 0.8rem;
+    animation: 16s spin alternate infinite;
+}
+.flattel {
+    background: yellow;
+    color: slategrey;
+    font-size: 1.1rem;
+}
+.flattel:hover {
+    border-radius: 50% 5px 10%;
+    background: purple;
+    color: yellow;
+    font-size: 18rem;
+    animation: 2s spin infinite;
+}
+.miscin {
+    background: gainsboro;
+    color: deepskyblue;
+    font-size: 0.33rem;
+}
+.narlal {
+    background: honeydew;
+    color: hotpink;
+    font-size: 1.1rem;
+    text-align: right;
+}
+.narlal:hover {
+    border: 1rem black dashed;
+    color: black;
+    background: royalblue;
+    font-size: 3rem;
+}
+.marbit {
+    background: pink;
+    color: lightcoral;
+    font-size: 0.35rem;
+}
+.till {
+    background: limegreen;
+    color: linen;
+    font-size: 0.25rem;
+}
+.bhozar {
+    background: rosybrown;
+    color: wheat;
+    font-size: 0.05rem;
+}
+.flibbit {
+    background: seagreen;
+    color: white;
+}
+.krandiss {
+    background: peru;
+    color: peachpuff;
+    font-size: 1.2rem;
+}
+.krandiss:hover {
+    box-shadow: 50px 50px black;
+    border: 15px grey double;
+    border-radius: 10px 4px 90%;
+    color: black;
+    background: black;
+    position: absolute;
+    top: 2rem;
+    right: 0;
+    animation: 1s spinBig infinite;
+}
+.yonlis {
+    background: midnightblue;
+    color: moccasin;
+    font-size: 0.2rem;
+    animation: 21s onHover alternate infinite;
+}
+.lobar {
+    color: olivedrab;
+    font-size: 1.3rem;
+}
+.lobar:hover {
+    color: silver;
+    background: seashell;
+    animation: 1s spinBig infinite;
+    position: fixed;
+    width: 12vw;
+    height: 10vh;
+    z-index: 2;
+    top: 0;
+    left: 0;
+}
+.twarm {
+    background: mintcream;
+    color: saddlebrown;
+    font-size: 0.1rem;
+}
+.pingbo {
+    background: salmon;
+    color: paleturquoise;
+    font-size: 0.45rem;
+    animation: 1s changeBG alternate infinite;
+}
+.gandar {
+    background: plum;
+    color: lightyellow;
+    font-size: 0.72rem;
+}
+.gandar:hover {
+    position: fixed;
+    background: blue;
+    color: royalblue;
+    z-index: 2;
+    font-size: 16rem;
+    top: 0;
+    left: 25%;
+    margin: 0 auto;
+    width: 100vw;
+    animation: 1s spinBig infinite;
+}
