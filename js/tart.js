@@ -87,8 +87,8 @@ var TART = (function() {
             boxElement.style.color = generateHexColor();
             // Logic here: I want the font size to be no bigger
             // than 2rem, but no smaller than 0.02rem.
-            boxElement.style.fontSize = (Math.random() + Math.random()) + "rem";
-            boxElement.style.textAlign = Math.random() > 0.5 ? "left" : "right";
+            boxElement.style.fontSize = (Math.random() + (Math.random() * 0.5)) + "rem";
+            boxElement.style.textAlign = Math.random() > 0.3 ? "left" : "right";
             // Append the new element to the body
             document.body.appendChild(boxElement);
         }
