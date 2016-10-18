@@ -35,6 +35,13 @@ var TART = (function() {
         }
         return Math.floor(Math.random() * parseInt(highNum));
     }
+    // Returns a hex value in the form of:
+    // "#xxxxxx" where x is a hex value 0-F.
+    // From comments here:
+    // https://www.paulirish.com/2009/random-hex-color-code-snippets/
+    function generateHexColor() {
+        return "#" + Math.random().toString(16).slice(2, 8).toUpperCase();
+    }
     // Returns a random element from an array
     // that will be passed in, defaults to returning
     // 1, 2, or 3.
@@ -71,10 +78,17 @@ var TART = (function() {
             // Now apply them to the boxElement.
             boxElement.style.width = boxWidth + "px";
             boxElement.style.height = boxHeight + "px";
+            // Assign the box a random class
+            boxElement.classList.add(getRandomElement(randomCSSClasses));
             // Fill in the box's value with some weird value.
             boxElement.innerText = generateString();
-            // Add a random class
-            boxElement.classList.add(getRandomElement(randomCSSClasses));
+            // Add a bunch of random CSS rules
+            boxElement.style.backgroundColor = generateHexColor();
+            boxElement.style.color = generateHexColor();
+            // Logic here: I want the font size to be no bigger
+            // than 2rem, but no smaller than 0.02rem.
+            boxElement.style.fontSize = (Math.random() + Math.random()) + "rem";
+            boxElement.style.textAlign = Math.random() > 0.5 ? "left" : "right";
             // Append the new element to the body
             document.body.appendChild(boxElement);
         }
@@ -84,18 +98,23 @@ var TART = (function() {
             element.classList.add("touched");
         }
     }
+    function addBodyPulse() {
+        document.body.style.backgroundColor = generateHexColor();
+        /* document.body.style.webkitAnimation = "background 70s"; */
+    }
     function createEventListeners() {
         var spans = document.getElementsByTagName("SPAN");
         for(var span in spans) {
             // Make sure we aren't acting on prototype properties
             if(spans.hasOwnProperty(span)) {
-                spans[span].addEventListener("hover", addHoverClass(spans[span]));
+                spans[span].addEventListener("mouseenter", addHoverClass(spans[span]));
             }
         }
     }
     // Initialization function for TART.
     tartModule.init = function() {
         draw();
+        addBodyPulse();
         createEventListeners();
     };
     // I told you so! We're returning our module.

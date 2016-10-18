@@ -97,7 +97,7 @@ body, html {
 }
 body {
     background: floralwhite;
-    animation: 20s changeBG infinite;
+    /* animation: 20s changeBG infinite; */
 }
 span {
     position: relative;
@@ -113,12 +113,8 @@ span:hover {
     cursor: pointer;
     animation: 2s onHover infinite;
 }
-/* Custom CSS Classes */
+/* Custom Hover & Animation States */
 /* (This list is maintained in the javascript) */
-.atep {
-    color: skyblue;
-    font-size: 1.1rem;
-}
 .atep:hover {
     color: limegreen;
     font-family: monospace;
@@ -128,15 +124,7 @@ span:hover {
     animation: 2s spin infinite;
 }
 .munbar {
-    background: purple;
-    color: white;
-    font-size: 0.8rem;
     animation: 16s spin alternate infinite;
-}
-.flattel {
-    background: yellow;
-    color: slategrey;
-    font-size: 1.1rem;
 }
 .flattel:hover {
     border-radius: 50% 5px 10%;
@@ -145,46 +133,11 @@ span:hover {
     font-size: 18rem;
     animation: 2s spin infinite;
 }
-.miscin {
-    background: gainsboro;
-    color: deepskyblue;
-    font-size: 0.33rem;
-}
-.narlal {
-    background: honeydew;
-    color: hotpink;
-    font-size: 1.1rem;
-    text-align: right;
-}
 .narlal:hover {
     border: 1rem black dashed;
     color: black;
     background: royalblue;
     font-size: 3rem;
-}
-.marbit {
-    background: pink;
-    color: lightcoral;
-    font-size: 0.35rem;
-}
-.till {
-    background: limegreen;
-    color: linen;
-    font-size: 0.25rem;
-}
-.bhozar {
-    background: rosybrown;
-    color: wheat;
-    font-size: 0.05rem;
-}
-.flibbit {
-    background: seagreen;
-    color: white;
-}
-.krandiss {
-    background: peru;
-    color: peachpuff;
-    font-size: 1.2rem;
 }
 .krandiss:hover {
     box-shadow: 50px 50px black;
@@ -198,14 +151,7 @@ span:hover {
     animation: 1s spinBig infinite;
 }
 .yonlis {
-    background: midnightblue;
-    color: moccasin;
-    font-size: 0.2rem;
     animation: 21s onHover alternate infinite;
-}
-.lobar {
-    color: olivedrab;
-    font-size: 1.3rem;
 }
 .lobar:hover {
     color: silver;
@@ -218,21 +164,8 @@ span:hover {
     top: 0;
     left: 0;
 }
-.twarm {
-    background: mintcream;
-    color: saddlebrown;
-    font-size: 0.1rem;
-}
 .pingbo {
-    background: salmon;
-    color: paleturquoise;
-    font-size: 0.45rem;
     animation: 1s changeBG alternate infinite;
-}
-.gandar {
-    background: plum;
-    color: lightyellow;
-    font-size: 0.72rem;
 }
 .gandar:hover {
     position: fixed;
