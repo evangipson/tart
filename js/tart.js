@@ -23,9 +23,9 @@ var TART = (function() {
         "pingbo",
         "gandar"
     ];
-    var boxAmount = 1000;
-    var boxWidthLimit = 60;
-    var boxHeightLimit = 32;
+    var boxAmount = 999;
+    var boxWidthLimit = 55;
+    var boxHeightLimit = 37;
     var boxWidth, boxHeight = 0;
     // Returns a number, defaults 0-100.
     function randomNum(highNum) {
@@ -70,9 +70,11 @@ var TART = (function() {
         boxHeight = randomNum(boxHeightLimit);
     }
     function draw() {
+        // Initialize boxElement outside of our for loop
+        var boxElement = document.createElement("span");
         for(var i = 0; i < boxAmount; i++) {
             // Create a new span element
-            var boxElement = document.createElement("span");
+            boxElement = document.createElement("span");
             // Reset the height and width
             createBox();
             // Now apply them to the boxElement.
@@ -103,13 +105,19 @@ var TART = (function() {
         /* document.body.style.webkitAnimation = "background 70s"; */
     }
     function createEventListeners() {
-        var spans = document.getElementsByTagName("SPAN");
+        /* var spans = document.getElementsByTagName("SPAN");
         for(var span in spans) {
             // Make sure we aren't acting on prototype properties
             if(spans.hasOwnProperty(span)) {
                 spans[span].addEventListener("mouseenter", addHoverClass(spans[span]));
             }
-        }
+        } */
+        // Set up the click handler for the smokescreen
+        var smokescreenElement = document.getElementsByClassName("smokescreen")[0];
+        smokescreenElement.addEventListener("click", function(){
+            smokescreenElement.style.top = "-100vh";
+            smokescreenElement.style.webkitTransition = "top 4s";
+        });
     }
     // Initialization function for TART.
     tartModule.init = function() {
