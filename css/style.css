@@ -64,7 +64,7 @@
         top: 50%;
         left: 25%;
         font-size: 1rem;
-        transform: rotate(1080deg);
+        transform: rotate(720deg);
         background: none;
     }
     100% {
@@ -75,18 +75,48 @@
         background: black;
     }
 }
-@keyframes changeBG {
+@keyframes wackoDacko {
     0% {
-        background: floralwhite;
+        font-size: 0.8rem;
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        transform: skew(9deg);
     }
-    50% {
-        background: ghostwhite;
+    40% {
+        font-size: 1.1rem;
+        bottom: 60px;
+        right: 8.5rem;
+        transform: skewY(10deg);
     }
     80% {
-        background: #11ef66;
+        font-size: 0.9rem;
+        right: 50px;
+        transform: skewY(40deg);
     }
     100% {
-        background: floralwhite;
+        font-size: 0.6rem;
+        bottom: 120px;
+        right: 50px;
+        transform: skewX(40deg);
+    }
+}
+@keyframes droppingHot {
+    0% {
+        font-size: 0.2rem;
+        position: fixed;
+        transform: rotate(0deg);
+        top: -10%;
+    }
+    50% {
+        font-size: 1.1rem;
+        top: 50%;
+        transform: rotate(180deg);
+    }
+    100% {
+        font-size: 1.6rem;
+        top: 110%;
+        transform: rotate(-60deg);
     }
 }
 /* HTML Resets & Default Styles */
@@ -115,6 +145,15 @@ span:hover {
     cursor: pointer;
     animation: 2s onHover infinite;
 }
+/* Set up the juiciest random
+ * span animations, regardless
+ * of class */
+span:nth-child(15n+0) {
+    z-index: -1;
+}
+span:nth-child(6n+9) {
+    z-index: 4;
+}
 /* Custom CSS Styles for Classes */
 
 /* Custom Hover & Animation States */
@@ -127,8 +166,11 @@ span:hover {
     font-size: 6rem;
     animation: 2s spin infinite;
 }
-.munbar {
-    animation: 16s spin alternate infinite;
+.munbar:hover {
+    background: white;
+    color: white;
+    font-size: 2.4rem;
+    animation: 6s droppingHot infinite;
 }
 .flattel:hover {
     border-radius: 50% 5px 10%;
