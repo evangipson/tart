@@ -32,7 +32,7 @@ let TART = (function() {
     ];
     /* Block scoped, immutable.
      * (Can't be assigned new content) */
-    let boxAmount = randomNum(200) + 200;
+    let boxAmount = randomNum(200) + 150;
     let boxWidthLimit = randomNum(250) + randomNum(40) + 20;
     let boxHeightLimit = randomNum(250) + randomNum(20) + 10;
     // Block scoped, mutable.
@@ -110,8 +110,8 @@ let TART = (function() {
             boxHeight = randomNum(boxHeightLimit);
             /* Reset boxWidthLimit and boxHeightLimit
              * every so often. */
-            boxHeightLimit = Math.random() < 0.75 ? boxHeightLimit : randomNum(250) + randomNum(40) + 20;
-            boxWidthLimit = Math.random() < 0.75 ? boxWidthLimit : randomNum(250) + randomNum(40) + 10;
+            boxHeightLimit = Math.random() < 0.85 ? boxHeightLimit : randomNum(250) + randomNum(40) + 20;
+            boxWidthLimit = Math.random() < 0.85 ? boxWidthLimit : randomNum(250) + randomNum(40) + 10;
         }
         function animateBox(animationSeconds = 10, animationNames = [ "spin alternate", "droppingHot", "spinBig", "wackoDacko", "onHover alternate", "onHover", "wackoDacko alternate"]) {
             // 50/50 chance we may not even do it.
