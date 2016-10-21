@@ -27,9 +27,9 @@ let TART = (function() {
     ];
     // Block scoped, immutable.
     // (Can't be assigned new content)
-    const boxAmount = 333;
-    const boxWidthLimit = 155;
-    const boxHeightLimit = 104;
+    const boxAmount = 203;
+    const boxWidthLimit = 175;
+    const boxHeightLimit = 84;
     // Block scoped, mutable.
     let boxWidth, boxHeight = 0;
     // Returns a number, defaults 0-100.
@@ -87,40 +87,47 @@ let TART = (function() {
             // Logic here: I want the font size to be no bigger
             // than 2rem, but no smaller than 0.02rem.
             boxElement.style.fontSize = (Math.random() + (Math.random() * 0.5)) + "rem";
-            boxElement.style.textAlign = Math.random() > 0.3 ? "left" : "right";
+            // 70% chance to align text to the left, otherwise
+            // align the text to the right.
+            boxElement.style.textAlign = Math.random() < 0.7 ? "left" : "right";
+            // Apply the background pulse in random intervals
+            // of anywhere from 0.05s-20s
+            addBackgroundPulse(boxElement, (Math.random() * (Math.random() * 20000)));
             // Append the new element to the body
             document.body.appendChild(boxElement);
         }
     }
     /* This function will continually call itself
-     * to "pulse" the background of the document.body. */
-    function addBodyPulse(bodyTransition = false, animationTimeMS = 8000) {
+     * to "pulse" the background of the document.body
+     * by default, both animationTimeMS and element
+     * can be overridden. */
+    function addBackgroundPulse(element = document.body, animationTimeMS = 8000, semaphore = false) {
         /* If this is our first time calling the function, set the
          * background and call the function again. */
-        if(!bodyTransition) {
-            document.body.style.webkitTransition = "background " + animationTimeMS/1000 + "s";
+        if(!semaphore) {
+            element.style.webkitTransition = "background " + animationTimeMS/1000 + "s";
             /* Call our function again in 1ms
              * to give the CSS time to "refresh?"
              * (I know there's a better answer here, why
              * wouldn't this work without setTimeout?) */
-            setTimeout(function(){ 
-                addBodyPulse(true);
+            setTimeout(function(){
+                addBackgroundPulse(element, animationTimeMS, true);
             }, 1);
         }
         /* If we've already called this function and
          * set the bodyTransition, we should call this
          * function again in the animationTimeMS specified. */
         else {
-            document.body.style.background = generateHexColor();
+            element.style.background = generateHexColor();
             setTimeout(function(){
-                addBodyPulse();
+                addBackgroundPulse(element, animationTimeMS, false);
             }, animationTimeMS);
         }
     }
     // Initialization function for TART.
     tartModule.init = function() {
         draw();
-        addBodyPulse();
+        addBackgroundPulse();
         // createEventListeners();
     };
     // I told you so! We're returning our module.
