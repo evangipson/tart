@@ -1,6 +1,6 @@
 // The TART variable that holds our information
 // to start the game.
-const TART = (function() {
+let TART = (function() {
     // I'd like to use ECMAScript for this project.
     'use strict';
     // The module we'll end up returning
@@ -33,11 +33,7 @@ const TART = (function() {
     // Block scoped, mutable.
     let boxWidth, boxHeight = 0;
     // Returns a number, defaults 0-100.
-    function randomNum(highNum) {
-        // Set the default value for highNum
-        if(highNum === undefined) {
-            highNum = 100;
-        }
+    function randomNum(highNum = 100) {
         return Math.floor(Math.random() * parseInt(highNum));
     }
     // Returns a hex value in the form of:
@@ -50,18 +46,14 @@ const TART = (function() {
     // Returns a random element from an array
     // that will be passed in, defaults to returning
     // 1, 2, or 3.
-    function getRandomElement(sourceArray) {
-        // Set the default value for sourceArray
-        if(sourceArray === undefined) {
-            sourceArray = [1,2,3];
-        }
+    function getRandomElement(sourceArray = [1, 2, 3]) {
         return sourceArray[randomNum(sourceArray.length)];
     }
     // Will return an up to 5 character long string
-    // when invoked.
-    function generateString() {
+    // when invoked. Can be overridden by passing
+    // a new "possible" characters string.
+    function generateString(possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789") {
         let text = "";
-        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         for(let i = 0; i < 5; i++) {
             if(randomNum() > 50) {
                 text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -100,9 +92,30 @@ const TART = (function() {
             document.body.appendChild(boxElement);
         }
     }
-    function addBodyPulse() {
-        document.body.style.backgroundColor = generateHexColor();
-        /* document.body.style.webkitAnimation = "background 70s"; */
+    /* This function will continually call itself
+     * to "pulse" the background of the document.body. */
+    function addBodyPulse(bodyTransition = false, animationTimeMS = 8000) {
+        /* If this is our first time calling the function, set the
+         * background and call the function again. */
+        if(!bodyTransition) {
+            document.body.style.webkitTransition = "background " + animationTimeMS/1000 + "s";
+            /* Call our function again in 1ms
+             * to give the CSS time to "refresh?"
+             * (I know there's a better answer here, why
+             * wouldn't this work without setTimeout?) */
+            setTimeout(function(){ 
+                addBodyPulse(true);
+            }, 1);
+        }
+        /* If we've already called this function and
+         * set the bodyTransition, we should call this
+         * function again in the animationTimeMS specified. */
+        else {
+            document.body.style.background = generateHexColor();
+            setTimeout(function(){
+                addBodyPulse();
+            }, animationTimeMS);
+        }
     }
     // Initialization function for TART.
     tartModule.init = function() {
@@ -114,7 +127,6 @@ const TART = (function() {
     return tartModule;
 
     /* Deprecated functions
-
     function addHoverClass(element) {
         if(!element.classList.contains("touched")) {
             element.classList.add("touched");
@@ -129,9 +141,7 @@ const TART = (function() {
                 spans[span].addEventListener("mouseenter", addHoverClass(spans[span]));
             }
         }
-    }
-    
-    *********************/
+    } */
 })(); // Immediately Invoked Function Expression.
 
 // Call our initialization function, as GBG is already
