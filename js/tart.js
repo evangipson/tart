@@ -110,10 +110,17 @@ let TART = (function() {
             boxHeight = randomNum(boxHeightLimit);
             /* Reset boxWidthLimit and boxHeightLimit
              * every so often. */
-            boxHeightLimit = Math.random() < 0.85 ? boxHeightLimit : randomNum(250) + randomNum(40) + 20;
-            boxWidthLimit = Math.random() < 0.85 ? boxWidthLimit : randomNum(250) + randomNum(40) + 10;
+            boxHeightLimit = Math.random() < 0.83 ? boxHeightLimit : randomNum(250) + randomNum(40) + 20;
+            boxWidthLimit = Math.random() < 0.77 ? boxWidthLimit : randomNum(250) + randomNum(40) + 10;
         }
-        function animateBox(animationSeconds = 10, animationNames = [ "spin alternate", "droppingHot", "spinBig", "wackoDacko", "onHover alternate", "onHover", "wackoDacko alternate"]) {
+        function animateBox(animationSeconds = 10, animationNames = [ 
+            "spin alternate", 
+            "droppingHot", 
+            "spinBig", 
+            "wackoDacko", 
+            "onHover alternate", 
+            "onHover", 
+            "wackoDacko alternate"]) {
             // 50/50 chance we may not even do it.
             if(randomNum() < 0.50) {
                 /* 84% chance this doesn't go through, but if
@@ -121,7 +128,7 @@ let TART = (function() {
                  * defined in this scope (in the beginning of drawBoxes)
                  * to a random animation defined in animationNames, which
                  * could be overridden if need be. */
-                boxElement.style.webkitAnimation = Math.random() < 0.84 ? boxElement.style.webkitAnimation : randomNum(animationSeconds) + "s " + getRandomElement(animationNames);
+                boxElement.style.animation = Math.random() < 0.84 ? boxElement.style.animation : randomNum(animationSeconds) + "s " + getRandomElement(animationNames);
             }
         }
         for(let i = 0; i < boxAmount; i++) {
