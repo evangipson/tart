@@ -23,9 +23,9 @@ var TART = (function() {
         "pingbo",
         "gandar"
     ];
-    var boxAmount = 999;
-    var boxWidthLimit = 55;
-    var boxHeightLimit = 37;
+    var boxAmount = 333;
+    var boxWidthLimit = 155;
+    var boxHeightLimit = 104;
     var boxWidth, boxHeight = 0;
     // Returns a number, defaults 0-100.
     function randomNum(highNum) {
@@ -95,11 +95,11 @@ var TART = (function() {
             document.body.appendChild(boxElement);
         }
     }
-    function addHoverClass(element) {
+    /* function addHoverClass(element) {
         if(!element.classList.contains("touched")) {
             element.classList.add("touched");
         }
-    }
+    } */
     function addBodyPulse() {
         document.body.style.backgroundColor = generateHexColor();
         /* document.body.style.webkitAnimation = "background 70s"; */
@@ -113,17 +113,17 @@ var TART = (function() {
             }
         } */
         // Set up the click handler for the smokescreen
-        var smokescreenElement = document.getElementsByClassName("smokescreen")[0];
+        /* var smokescreenElement = document.getElementsByClassName("smokescreen")[0];
         smokescreenElement.addEventListener("click", function(){
             smokescreenElement.style.top = "-100vh";
             smokescreenElement.style.webkitTransition = "top 4s";
-        });
+        }); */
     }
     // Initialization function for TART.
     tartModule.init = function() {
         draw();
         addBodyPulse();
-        createEventListeners();
+        // createEventListeners();
     };
     // I told you so! We're returning our module.
     return tartModule;

@@ -98,7 +98,7 @@ body, html {
 }
 body {
     background: floralwhite;
-    overflow: hidden;
+    overflow-x: hidden;
     /* animation: 20s changeBG infinite; */
 }
 span {
@@ -116,24 +116,7 @@ span:hover {
     animation: 2s onHover infinite;
 }
 /* Custom CSS Styles for Classes */
-.smokescreen {
-    position: absolute;
-    z-index: 3;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    cursor: pointer;
-    background: rgba(0, 0, 0, 0.88);
-}
-.smokescreen h2 {
-    color: white;
-    font-size: 2rem;
-    font-weight: lighter;
-    text-align: center;
-    height: 50vh;
-    line-height: 50vh;
-}
+
 /* Custom Hover & Animation States */
 /* (This list is maintained in the javascript) */
 .atep:hover {
