@@ -1,12 +1,14 @@
 // The TART variable that holds our information
 // to start the game.
-var TART = (function() {
+const TART = (function() {
+    // I'd like to use ECMAScript for this project.
+    'use strict';
     // The module we'll end up returning
     // after we augment it.
-    var tartModule = {};
+    const tartModule = {};
     // Variables needed in functions, will
     // eventually get their own data file.
-    var randomCSSClasses = [
+    const randomCSSClasses = [
         "atep",
         "munbar",
         "flattel",
@@ -23,10 +25,13 @@ var TART = (function() {
         "pingbo",
         "gandar"
     ];
-    var boxAmount = 333;
-    var boxWidthLimit = 155;
-    var boxHeightLimit = 104;
-    var boxWidth, boxHeight = 0;
+    // Block scoped, immutable.
+    // (Can't be assigned new content)
+    const boxAmount = 333;
+    const boxWidthLimit = 155;
+    const boxHeightLimit = 104;
+    // Block scoped, mutable.
+    let boxWidth, boxHeight = 0;
     // Returns a number, defaults 0-100.
     function randomNum(highNum) {
         // Set the default value for highNum
@@ -55,11 +60,11 @@ var TART = (function() {
     // Will return an up to 5 character long string
     // when invoked.
     function generateString() {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        for(var i = 0; i < 5; i++) {
+        let text = "";
+        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for(let i = 0; i < 5; i++) {
             if(randomNum() > 50) {
-                text += possible.charAt(Math.floor(Math.random() * possible.length)); 
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
             }
         }
         return text;
@@ -71,8 +76,8 @@ var TART = (function() {
     }
     function draw() {
         // Initialize boxElement outside of our for loop
-        var boxElement = document.createElement("span");
-        for(var i = 0; i < boxAmount; i++) {
+        let boxElement = document.createElement("span");
+        for(let i = 0; i < boxAmount; i++) {
             // Create a new span element
             boxElement = document.createElement("span");
             // Reset the height and width
@@ -95,29 +100,9 @@ var TART = (function() {
             document.body.appendChild(boxElement);
         }
     }
-    /* function addHoverClass(element) {
-        if(!element.classList.contains("touched")) {
-            element.classList.add("touched");
-        }
-    } */
     function addBodyPulse() {
         document.body.style.backgroundColor = generateHexColor();
         /* document.body.style.webkitAnimation = "background 70s"; */
-    }
-    function createEventListeners() {
-        /* var spans = document.getElementsByTagName("SPAN");
-        for(var span in spans) {
-            // Make sure we aren't acting on prototype properties
-            if(spans.hasOwnProperty(span)) {
-                spans[span].addEventListener("mouseenter", addHoverClass(spans[span]));
-            }
-        } */
-        // Set up the click handler for the smokescreen
-        /* var smokescreenElement = document.getElementsByClassName("smokescreen")[0];
-        smokescreenElement.addEventListener("click", function(){
-            smokescreenElement.style.top = "-100vh";
-            smokescreenElement.style.webkitTransition = "top 4s";
-        }); */
     }
     // Initialization function for TART.
     tartModule.init = function() {
@@ -127,6 +112,26 @@ var TART = (function() {
     };
     // I told you so! We're returning our module.
     return tartModule;
+
+    /* Deprecated functions
+
+    function addHoverClass(element) {
+        if(!element.classList.contains("touched")) {
+            element.classList.add("touched");
+        }
+    }
+
+    function createEventListeners() {
+        let spans = document.getElementsByTagName("SPAN");
+        for(let span in spans) {
+            // Make sure we aren't acting on prototype properties
+            if(spans.hasOwnProperty(span)) {
+                spans[span].addEventListener("mouseenter", addHoverClass(spans[span]));
+            }
+        }
+    }
+    
+    *********************/
 })(); // Immediately Invoked Function Expression.
 
 // Call our initialization function, as GBG is already
