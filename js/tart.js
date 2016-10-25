@@ -38,40 +38,49 @@ let TART = (function() {
     let boxWidthLimit = randomNum(250) + randomNum(40) + 20;
     let boxHeightLimit = randomNum(250) + randomNum(20) + 10;
     let boxWidth, boxHeight = 0;
-    // Returns a number, defaults 0-100.
+    /** Will return a random number. If called with no
+     * arguments will return 0 to 100.
+     * @param {number} highNum Will set an upper limit.
+     * Optional. Defaults to 100. */
     function randomNum(highNum = 100) {
         return Math.floor(Math.random() * parseInt(highNum));
     }
-    /* Returns a hex value in the form of:
-     * "#xxxxxx" where x is a hex value 0-F.
-     * From comments here:
-     * https://www.paulirish.com/2009/random-hex-color-code-snippets/ */
+    /** Generates a six digit hex value, with 
+     * a pound sign appended.
+     * Returns in the form of:
+     * "#xxxxxx" where x is a hex value 0-F. */
     function generateHexColor() {
+        /* From comments here:
+        * https://www.paulirish.com/2009/random-hex-color-code-snippets/ */
         return "#" + Math.random().toString(16).slice(2, 8).toUpperCase();
     }
-    /* Returns a random element from an array
+    /** Returns a random element from an array
      * that will be passed in. Can also be called
      * with a bunch of args to spit out a random
-     * element of them. Valid Examples:
+     * element of them. 
+     * Valid Examples:
      * getRandomElement(theArg);
-     * getRandomElement('eggs', 'bacon', 'tomato'); */
+     * getRandomElement('eggs', 'bacon', 'tomato');
+     * @param {array} sourceArray array or list (thank you rest paramaters). */
     function getRandomElement(...sourceArray) {
         return sourceArray[randomNum(sourceArray.length)];
     }
-    /* Will return an up to 5 character long string
-     * when invoked. Can be overridden by passing
-     * a new "possible" characters string. */
-    function generateString(possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789") {
+    getRandomElement()
+    /** Will return a random string when invoked.
+     * @param {number} stringLimit length of the return string, in characters.
+     * @param {string} possible available characters for the return string. */
+    function generateString(stringLimit = 5, possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789") {
         let text = "";
-        for(let i = 0; i < 5; i++) {
+        for(let i = 0; i < stringLimit; i++) {
             if(randomNum() > 50) {
                 text += possible.charAt(Math.floor(Math.random() * possible.length));
             }
         }
         return text;
     }
-    /* Draws all the boxes on the screen using
-     * span elements then attaching them to the body. */
+    /** Draws all the span boxes on the screen
+     * then attaches them to the body element after it's done
+     * mutating and animating them. */
     function drawBoxes() {
         // Initialize boxElement (outside of the for loop below)
         let boxElement = document.createElement("span");
@@ -80,13 +89,14 @@ let TART = (function() {
         /* Note: These functions make use of the block-scope
          * i'm promised due to me using "let" when
          * instantiating boxElement; this function also
-         * makes use of "hiding", I don't need any other
+         * makes use of "hiding" or "closure".
+         * I don't need any other
          * function to see mutateBox and I KNOW that right
          * from the start, so might as well make it's scope
          * only the function that needs it.
          * Downside: It makes the drawBoxes function more
          * complex and harder to understand. */
-        // Will shape and color a box element
+        /** Will shape and color a box element. */
         function mutateBox() {
             // Now apply them to the boxElement
             boxElement.style.width = boxWidth + "px";
@@ -123,6 +133,9 @@ let TART = (function() {
              * of anywhere from 0.05s-20s */
             addBackgroundPulse(boxElement, (Math.random() * (Math.random() * 20000)));
         }
+        /** Will set the box's height and width, and also
+         * there's a small chance the limit for both boxHeight and boxWidth
+         * can change. */
         function resetBoxDimensions() {
             /* Reset our flag for huge box, because
              * this is the only function that modifies
@@ -144,7 +157,14 @@ let TART = (function() {
                 hugeBox = true;
             }
         }
-        function animateBox(animationSeconds = 10, animationNames = [ 
+        /** Animates a box by attaching a CSS class;
+         * the animations are defined in style.css. 
+         * @param {number} maxAnimationSeconds Defines how long
+         * a CSS animation will last, in seconds. Optional.
+         * @param {array} animationNames Make sure when
+         * overridding animationNames you use valid animations defined
+         * in style.css. Optional. */
+        function animateBox(maxAnimationSeconds = 10, animationNames = [ 
             "spin alternate", 
             "droppingHot", 
             "spinBig", 
@@ -159,7 +179,7 @@ let TART = (function() {
                  * defined in this scope (in the beginning of drawBoxes)
                  * to a random animation defined in animationNames, which
                  * could be overridden if need be. */
-                boxElement.style.animation = Math.random() < 0.84 ? boxElement.style.animation : randomNum(animationSeconds) + "s " + getRandomElement(animationNames);
+                boxElement.style.animation = Math.random() < 0.84 ? boxElement.style.animation : randomNum(maxAnimationSeconds) + "s " + getRandomElement(animationNames);
             }
         }
         for(let i = 0; i < boxAmount; i++) {
@@ -177,10 +197,17 @@ let TART = (function() {
             document.body.appendChild(boxElement);
         }
     }
-    /* This function will continually call itself
-     * to "pulse" the background of the document.body
-     * by default, both animationTimeMS and element
-     * can be overridden. */
+    /** addBackgroundPulse: This function will
+     * continually call itself to "pulse" the background
+     * of the document.body.
+     * @param {HTMLElement} element this will be what
+     * the background pulse gets added to. Defaults to
+     * document.body. Optional.
+     * @param {number} maxAnimationTimeMS Length of a full
+     * pulse from color to color, in milliseconds. Optional.
+     * @param {boolean} semaphore A flag for determining function
+     * behavior. Gets set to true if false. If already true,
+     * will ensure function is called again. Defaults to false; optional. */
     function addBackgroundPulse(element = document.body, animationTimeMS = 8000, semaphore = false) {
         /* If this is our first time calling the function, set the
          * background and call the function again. */
