@@ -8,6 +8,8 @@ let TART = (function() {
     const tartModule = {};
     /* Variables needed in functions, will
      * eventually get their own data file. */
+    /* This is going to need to match up
+     * with the classes used in style.css */
     const randomCSSClasses = [
         "atep",
         "munbar",
@@ -30,12 +32,11 @@ let TART = (function() {
         "fonu",
         "craynar"
     ];
-    /* Block scoped, immutable.
-     * (Can't be assigned new content) */
+    /* Block scoped, mutable.
+     * (Can be assigned new content) */
     let boxAmount = randomNum(200) + 150;
     let boxWidthLimit = randomNum(250) + randomNum(40) + 20;
     let boxHeightLimit = randomNum(250) + randomNum(20) + 10;
-    // Block scoped, mutable.
     let boxWidth, boxHeight = 0;
     // Returns a number, defaults 0-100.
     function randomNum(highNum = 100) {
@@ -113,6 +114,8 @@ let TART = (function() {
             else {
                 boxElement.classList.add("layer-1");
             }
+            // 20% chance to randomly rotate the box
+            boxElement.style.transform = Math.random() > 0.80 ? "rotate(" + randomNum(360) + "deg)" : "";
             /* Apply the background pulse in random intervals
              * of anywhere from 0.05s-20s */
             addBackgroundPulse(boxElement, (Math.random() * (Math.random() * 20000)));
