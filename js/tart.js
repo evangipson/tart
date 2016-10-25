@@ -50,9 +50,12 @@ let TART = (function() {
         return "#" + Math.random().toString(16).slice(2, 8).toUpperCase();
     }
     /* Returns a random element from an array
-     * that will be passed in, defaults to returning
-     * 1, 2, or 3. */
-    function getRandomElement(sourceArray = [1, 2, 3]) {
+     * that will be passed in. Can also be called
+     * with a bunch of args to spit out a random
+     * element of them. Valid Examples:
+     * getRandomElement(theArg);
+     * getRandomElement('eggs', 'bacon', 'tomato'); */
+    function getRandomElement(...sourceArray) {
         return sourceArray[randomNum(sourceArray.length)];
     }
     /* Will return an up to 5 character long string
