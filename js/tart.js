@@ -71,6 +71,8 @@ let TART = (function() {
     function drawBoxes() {
         // Initialize boxElement (outside of the for loop below)
         let boxElement = document.createElement("span");
+        // Flag to determine if this is a huge box or not.
+        let hugeBox = false;
         /* Note: These functions make use of the block-scope
          * i'm promised due to me using "let" when
          * instantiating boxElement; this function also
@@ -93,8 +95,12 @@ let TART = (function() {
             boxElement.style.backgroundColor = generateHexColor();
             boxElement.style.color = generateHexColor();
             /* Logic here: I want the font size to be no bigger
-             * than 2rem, but no smaller than 0.02rem. */
-            boxElement.style.fontSize = (Math.random() + (Math.random() * 0.5)) + "rem";
+             * than 2rem, but no smaller than 0.02rem, unless it's
+             * a "hugeBox", in which case, I'll blow out that font
+             * size so it's at least 6rem and at most 16rem, because
+             * if it's a hugeBox it'll have a large height and width
+             * that we need to fill. */
+            boxElement.style.fontSize = hugeBox ? randomNum(10) + 6 + "rem" : (Math.random() + (Math.random() * 0.5)) + "rem";
             /* 70% chance to align text to the left, otherwise
              * align the text to the right. */
             boxElement.style.textAlign = Math.random() < 0.7 ? "left" : "right";
@@ -105,6 +111,10 @@ let TART = (function() {
             addBackgroundPulse(boxElement, (Math.random() * (Math.random() * 20000)));
         }
         function resetBoxDimensions() {
+            /* Reset our flag for huge box, because
+             * this is the only function that modifies
+             * the variable. */
+            hugeBox = false;
             // Set boxWidth and boxHeight
             boxWidth = randomNum(boxWidthLimit);
             boxHeight = randomNum(boxHeightLimit);
@@ -112,6 +122,14 @@ let TART = (function() {
              * every so often. */
             boxHeightLimit = Math.random() < 0.83 ? boxHeightLimit : randomNum(250) + randomNum(40) + 20;
             boxWidthLimit = Math.random() < 0.77 ? boxWidthLimit : randomNum(250) + randomNum(40) + 10;
+            // Very small chance (2%) to return HUGE dimensions
+            if (randomNum(100) > 98) {
+                boxWidth = randomNum(boxWidthLimit * randomNum(10));
+                boxHeight = randomNum(boxHeightLimit * randomNum(10));
+                // Don't forget, we need to remember this
+                // in mutateBox above when setting font size.
+                hugeBox = true;
+            }
         }
         function animateBox(animationSeconds = 10, animationNames = [ 
             "spin alternate", 
