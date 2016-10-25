@@ -89,10 +89,9 @@ let TART = (function() {
          * i'm promised due to me using "let" when
          * instantiating boxElement; this function also
          * makes use of "hiding" or "closure".
-         * I don't need any other
-         * function to see mutateBox and I KNOW that right
-         * from the start, so might as well make it's scope
-         * only the function that needs it.
+         * I don't need any other function to see mutateBox
+         * and I KNOW that right from the start, so might as
+         * well make it's scope only the function that needs it.
          * Downside: It makes the drawBoxes function more
          * complex and harder to understand. */
         /** Will shape and color a box element. */
