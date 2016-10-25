@@ -65,7 +65,6 @@ let TART = (function() {
     function getRandomElement(...sourceArray) {
         return sourceArray[randomNum(sourceArray.length)];
     }
-    getRandomElement()
     /** Will return a random string when invoked.
      * @param {number} stringLimit length of the return string, in characters.
      * @param {string} possible available characters for the return string. */
