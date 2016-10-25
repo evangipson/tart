@@ -100,12 +100,19 @@ let TART = (function() {
              * size so it's at least 6rem and at most 16rem, because
              * if it's a hugeBox it'll have a large height and width
              * that we need to fill. */
-            boxElement.style.fontSize = hugeBox ? randomNum(10) + 6 + "rem" : (Math.random() + (Math.random() * 0.5)) + "rem";
+            boxElement.style.fontSize = hugeBox ? randomNum(15) + 10 + "rem" : (Math.random() + (Math.random() * 0.5)) + "rem";
             /* 70% chance to align text to the left, otherwise
              * align the text to the right. */
             boxElement.style.textAlign = Math.random() < 0.7 ? "left" : "right";
             // Small chance to float right (12%)
             boxElement.style.float = Math.random() < 0.88 ? "left" : "right";
+            // 80/20 chance the box will be in layer 1 or 2.
+            if(Math.random() > 0.80) {
+                boxElement.classList.add("layer-2");
+            }
+            else {
+                boxElement.classList.add("layer-1");
+            }
             /* Apply the background pulse in random intervals
              * of anywhere from 0.05s-20s */
             addBackgroundPulse(boxElement, (Math.random() * (Math.random() * 20000)));

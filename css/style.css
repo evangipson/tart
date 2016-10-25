@@ -155,7 +155,12 @@ span:nth-child(6n+9) {
     z-index: 4;
 }
 /* Custom CSS Styles for Classes */
-
+.layer-1 {
+    z-index: 1;
+}
+.layer-2 {
+    z-index: 2;
+}
 /* Custom Hover & Animation States */
 /* (This list is maintained in the javascript) */
 .atep:hover {
