@@ -62,7 +62,7 @@ let TART = (function() {
      * getRandomElement(theArg);
      * getRandomElement('eggs', 'bacon', 'tomato');
      * @param {array} sourceArray array or list (thank you rest paramaters). */
-    function getRandomElement(...sourceArray) {
+    function getRandomElement(sourceArray) {
         return sourceArray[randomNum(sourceArray.length)];
     }
     /** Will return a random string when invoked.
